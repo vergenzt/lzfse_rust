@@ -20,13 +20,8 @@ jobs:
       uses: actions-rs/toolchain@v1
       with:
         toolchain: stable
-        target: wasm32-unknown-unknown
-
-    - name: Install wasm-pack
-      run: |
-        curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+        target: wasm32-wasip1
 
     - name: Build lzfoo to WebAssembly
       working-directory: lzfoo
-      run: |
-        wasm-pack build --release --target web
+      run: cargo build --target wasm32-wasip1
