@@ -1,1 +1,38 @@
+name: Compile lzfoo to WebAssembly
 
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        target: wasm32-unknown-unknown
+
+    - name: Install wasm-pack
+      run: |
+        curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+
+    - name: Build lzfoo to WebAssembly
+      working-directory: lzfoo
+      run: |
+        wasm-pack build --release --target web
+
+    - name: Upload WebAssembly artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: lzfoo-wasm
+        path: lzfoo/pkg/*.wasm
