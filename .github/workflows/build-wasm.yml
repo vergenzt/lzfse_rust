@@ -30,9 +30,3 @@ jobs:
       working-directory: lzfoo
       run: |
         wasm-pack build --release --target web
-
-    - name: Upload WebAssembly artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: lzfoo-wasm
-        path: lzfoo/pkg/*.wasm
