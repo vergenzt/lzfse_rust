@@ -26,11 +26,8 @@ jobs:
       working-directory: lzfoo
       run: cargo build --target wasm32-wasip1
 
-    - name: debug list files
-      run: ls -lR lzfoo target
-
     - name: Upload WebAssembly artifact
       uses: actions/upload-artifact@v4
       with:
         name: lzfoo.wasm
-        path: lzfoo/target/wasm32-wasip1/debug/lzfoo.wasm
+        path: target/wasm32-wasip1/debug/lzfoo.wasm
